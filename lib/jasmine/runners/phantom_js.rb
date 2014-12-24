@@ -17,7 +17,7 @@ module Jasmine
         phantom_script = File.join(File.dirname(__FILE__), 'phantom_jasmine_run.js')
         command = "#{phantom_js_path} --debug=true '#{phantom_script}' #{jasmine_server_url} #{show_console_log} '#{@phantom_config_script}'"
         puts "Command = #{command}"
-        sleep 1000
+        # sleep 1000
         Open3.popen2e(command) do |stdin, output, wait_thread|
           puts wait_thread.pid
           output.each do |line|
