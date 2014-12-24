@@ -12,10 +12,13 @@ module Jasmine
       end
 
       def run
+        puts "PhantomJS runner::run"
         phantom_script = File.join(File.dirname(__FILE__), 'phantom_jasmine_run.js')
         command = "#{phantom_js_path} '#{phantom_script}' #{jasmine_server_url} #{show_console_log} '#{@phantom_config_script}'"
+        puts "Command = #{command}"
         IO.popen(command) do |output|
           output.each do |line|
+            puts ">> #{line}"
             if line =~ /^jasmine_spec_result/
               line = line.sub(/^jasmine_spec_result/, '')
               raw_results = JSON.parse(line, :max_nesting => false)
