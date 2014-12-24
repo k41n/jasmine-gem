@@ -11,7 +11,9 @@ module Jasmine
         handler = Rack::Handler.get('webrick')
         handler.run(@application, :Port => @port, :AccessLog => [])
       else
-        server = Rack::Server.new(@rack_options.merge(:Port => @port, :AccessLog => []))
+        puts "Before starting server"
+        puts "@rack_options = #{@rack_options}"
+        server = Rack::Server.new(@rack_options.merge(:Port => @port, :AccessLog => [], :server => 'webrick'))
         # workaround for Rack bug, when Rack > 1.2.1 is released Rack::Server.start(:app => Jasmine.app(self)) will work
         server.instance_variable_set(:@app, @application)
         server.start
