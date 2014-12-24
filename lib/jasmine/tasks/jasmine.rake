@@ -58,6 +58,7 @@ namespace :jasmine do
     end
 
     server = Jasmine::Server.new(config.port(:ci), Jasmine::Application.app(config), config.rack_options)
+    puts "Server = #{server}"
     t = Thread.new do
       server.start
     end
